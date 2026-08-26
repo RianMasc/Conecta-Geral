@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Plataforma de apoio ao projeto de inclusão digital Conecta Gerações.">
+<title>{% block title %}Conecta Gerações{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="brand-mark">CG</div><div><strong>Conecta</strong><span>Gerações</span></div></div>
+  <div class="sidebar-label">PRINCIPAL</div>
+  <nav class="side-nav">
+    <a class="{% if request.endpoint=='index' %}active{% endif %}" href="{{url_for('index')}}"><span>⌂</span> Dashboard</a>
+    <a class="{% if request.endpoint in ['participantes','novo_participante','participante_detalhe','editar_participante'] %}active{% endif %}" href="{{url_for('participantes')}}"><span>♙</span> Participantes</a>
+    <a class="{% if request.endpoint in ['encontros','materiais'] %}active{% endif %}" href="{{url_for('encontros')}}"><span>▣</span> Encontros</a>
+    <a class="{% if request.endpoint=='acompanhamento' %}active{% endif %}" href="{{url_for('acompanhamento')}}"><span>✓</span> Acompanhamento</a>
+  </nav>
+  <div class="sidebar-label">ANÁLISES</div>
+  <nav class="side-nav">
+    <a class="{% if request.endpoint=='relatorios' %}active{% endif %}" href="{{url_for('relatorios')}}"><span>▥</span> Indicadores</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="access-btn" onclick="toggleFont()" title="Aumentar fonte"><span>A</span> Tamanho do texto</button>
+    <button class="access-btn" onclick="toggleContrast()" title="Alto contraste"><span>◐</span> Alto contraste</button>
+    <div class="project-card"><span class="mini-icon">♥</span><div><strong>Inclusão digital</strong><small>Tecnologia que aproxima pessoas.</small></div></div>
+  </div>
+</aside>
+<div class="main-area">
+<header class="topbar"><button class="menu-btn" onclick="document.body.classList.toggle('sidebar-open')">☰</button><div class="crumb">Projeto de Extensão <span>/</span> <strong>{{ self.title() or 'Conecta Gerações' }}</strong></div><div class="top-actions"><button class="icon-btn" onclick="toggleFont()" title="Acessibilidade">A+</button><div class="profile"><div class="avatar">CG</div><div><strong>Monitor</strong><small>Equipe do projeto</small></div></div></div></header>
+<main class="content">
+{% with messages=get_flashed_messages(with_categories=true) %}{% for cat,msg in messages %}<div class="flash {{cat}}"><span>{{ '✓' if cat=='success' else '!' }}</span>{{msg}}<button onclick="this.parentElement.remove()">×</button></div>{% endfor %}{% endwith %}
+{% block content %}{% endblock %}
+</main>
+<footer>Projeto de Extensão em Desenvolvimento de Sistemas · UNINOVE</footer>
+</div></div>
+<script src="{{ url_for('static',filename='app.js') }}"></script>
+</body></html>

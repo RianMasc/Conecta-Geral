@@ -1,0 +1,6 @@
+erDiagram
+  PARTICIPANTE ||--o{ ACOMPANHAMENTO : possui
+  ENCONTRO ||--o{ ACOMPANHAMENTO : recebe
+  PARTICIPANTE { int id PK string nome int idade string contato string observacoes }
+  ENCONTRO { int numero PK string titulo string descricao }
+  ACOMPANHAMENTO { int id PK int participante_id FK int encontro FK int presenca int aprendizado string observacoes }

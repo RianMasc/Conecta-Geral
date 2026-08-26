@@ -1,0 +1,9 @@
+flowchart LR
+  M([Monitor])
+  P([Participante])
+  S((Conecta Gerações))
+  M -->|cadastra| S
+  M -->|consulta| S
+  M -->|registra presença/aprendizado| S
+  M -->|consulta materiais| S
+  P -->|participa dos encontros| S

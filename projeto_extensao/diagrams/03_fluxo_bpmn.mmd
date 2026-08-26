@@ -1,0 +1,10 @@
+flowchart TD
+  A([Início]) --> B[Identificar participante]
+  B --> C[Realizar encontro]
+  C --> D{Participou?}
+  D -->|Sim| E[Registrar presença]
+  D -->|Não| F[Registrar ausência]
+  E --> G[Registrar aprendizado e observações]
+  F --> G
+  G --> H[Atualizar indicadores]
+  H --> I([Fim])
